@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import logo from "../../public/XtremeLogo.png";
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,7 +42,7 @@ export const Navbar = () => {
       className={`sticky top-0 w-full z-50 transition-all duration-300 ${
         isScrolled
           ? "bg-white/95 backdrop-blur-md shadow-md py-2"
-          : "bg-white/80 backdrop-blur-sm py-4"
+          : "bg-white/80 backdrop-blur-sm py-4 shadow-md"
       }`}
     >
       <div className="container mx-auto flex items-center justify-between px-6 lg:px-12">
@@ -53,12 +54,12 @@ export const Navbar = () => {
         >
           <img
             className="h-12 w-auto rounded-xl"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSu7KXe4YL8SkRgv-hmGyxlZQkAcVc4ip67fg&s"
+            src="/XtremeLogo.png"
             alt="Logo"
+            style={{
+              height: "40px",
+            }}
           />
-          <span className="ml-3 text-gray-900 font-semibold text-lg tracking-tight">
-            Xtreme<span className="text-orange-600">Wireless</span>
-          </span>
         </a>
 
         {/* Desktop Menu */}
@@ -70,13 +71,13 @@ export const Navbar = () => {
               onClick={() => handleItemClick(item.path)}
               className={`relative px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
                 activeItem === item.path
-                  ? "text-orange-600 bg-orange-50"
-                  : "text-gray-700 hover:text-orange-600"
+                  ? "text-yellow-600 bg-yellow-50"
+                  : "text-gray-700 hover:text-yellow-600"
               }`}
             >
               {item.label}
               {activeItem === item.path && (
-                <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-orange-600 rounded-full"></span>
+                <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-yellow-600 rounded-full"></span>
               )}
             </a>
           ))}
@@ -107,7 +108,7 @@ export const Navbar = () => {
               onClick={() => handleItemClick(item.path)}
               className={`block py-3 px-4 rounded-lg transition-all duration-300 ${
                 activeItem === item.path
-                  ? "bg-orange-50 text-orange-600 font-medium"
+                  ? "bg-yellow-50 text-yellow-600 font-medium"
                   : "text-gray-700 hover:bg-gray-50"
               }`}
             >
