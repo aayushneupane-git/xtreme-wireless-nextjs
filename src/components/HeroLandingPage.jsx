@@ -1,6 +1,8 @@
+"use client";
 import React from "react";
 import ContentWrapper from "./ContentWrapper";
-
+import { Player } from "@lottiefiles/react-lottie-player";
+import Lottie from "lottie-react";
 const HeroLandingPage = () => {
   return (
     <ContentWrapper>
@@ -22,8 +24,15 @@ const HeroLandingPage = () => {
         </div>
 
         {/* Right side */}
-        <div className="bg-green-300 p-6 flex items-center justify-center h-[70vh] md:h-full">
-          <p className="text-2xl md:text-3xl">Animation Here</p>
+        <div className=" p-6  flex  ">
+          <Player
+            autoplay
+            loop
+            src="/homebg.json" // put file in /public/animations
+            style={{ height: 520, width: 520}}
+            keepLastFrame
+            renderer="svg" // svg | canvas
+          />
         </div>
       </div>
     </ContentWrapper>
