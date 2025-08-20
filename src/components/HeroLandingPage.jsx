@@ -1,9 +1,23 @@
 "use client";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import ContentWrapper from "./ContentWrapper";
 import { Player } from "@lottiefiles/react-lottie-player";
 import Lottie from "lottie-react";
+import "../app/style.css";
+
 const HeroLandingPage = () => {
+  const playerRef = useRef(null);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (playerRef.current) {
+        playerRef.current.pause(); // Stop animation after 1.5s
+      }
+    }, 1200);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <ContentWrapper>
       <div className="grid grid-cols-1 md:grid-cols-2 md:h-[80vh]">
@@ -23,15 +37,28 @@ const HeroLandingPage = () => {
           </button>
         </div>
 
-        {/* Right side */}
-        <div className=" p-6  flex  ">
+        <div className="relative flex items-center justify-center h-[520px] w-[520px]">
+          {/* Floating Images */}
+          <img
+            src="https://images.squarespace-cdn.com/content/v1/605b50a49e27ed4cf7bf564a/1618160110000-FTUKCS1FTBGB8FCMBKCM/boost-mobile.png"
+            className="w-[80px] h-[80px] absolute top-10 left-50 animate-float-slow"
+          />
+          <img
+            src="https://static.riverbender.com/media/51421110745-spectrum.png"
+            className="w-[80px] h-[80px] absolute top-30 right-0 animate-float rounded-xl"
+          />
+          <img
+            src="https://media.istockphoto.com/id/1066216872/vector/vector-illustration-icon-with-a-communication-concept-for-the-setting-and-repair-information.jpg?s=612x612&w=0&k=20&c=JOQDa1v_y9eiAk8i8DfL9eX_bzvXyX4KGLH2W-eYs8o="
+            className="w-[150px] h-[150px] absolute top-40 left-0 animate-float-fast"
+          />
+
+          {/* Player in center */}
           <Player
+            ref={playerRef}
             autoplay
-            loop
-            src="/homebg.json" // put file in /public/animations
-            style={{ height: 520, width: 520}}
-            keepLastFrame
-            renderer="svg" // svg | canvas
+            src="/homebg.json"
+            style={{ height: 520, width: 520 }}
+            renderer="svg"
           />
         </div>
       </div>
