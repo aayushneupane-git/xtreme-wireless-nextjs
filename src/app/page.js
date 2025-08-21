@@ -8,7 +8,6 @@ import AboutPage from "@/components/AboutUs";
 export default function Home() {
   return (
     <ThemeProvider>
-      <Navbar />
       <ContentWrapper>
         <HeroLandingPage />
         <AboutPage/>

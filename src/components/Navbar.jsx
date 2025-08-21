@@ -32,7 +32,7 @@ export const Navbar = () => {
   const navItems = [
     { path: "/", label: "Home" },
     { path: "/about", label: "About" },
-    { path: "/services", label: "Services" },
+    { path: "/locations", label: "Locations" },
     { path: "/team", label: "Our Team" },
     { path: "/career", label: "Career" },
   ];
@@ -46,7 +46,6 @@ export const Navbar = () => {
       }`}
     >
       <div className="container mx-auto flex items-center justify-between px-6 lg:px-12">
-        {/* Logo */}
         <a
           href="/"
           className="flex items-center group"
