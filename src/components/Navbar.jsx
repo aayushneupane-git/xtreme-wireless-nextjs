@@ -13,19 +13,21 @@ export const Navbar = () => {
   const [isMounted, setIsMounted] = useState(false);
   const [isAtTop, setIsAtTop] = useState(true);
 
-  // Set mounted state to avoid hydration issues
+  // Ensure component is mounted before accessing DOM
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
   // Handle scroll effect for navbar and top detection
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
     const handleScroll = () => {
       const scrollY = window.scrollY;
       setIsScrolled(scrollY > 10);
-      setIsAtTop(scrollY < 50); // Adjust this threshold as needed
+      setIsAtTop(scrollY < 50);
     };
-    
+
     handleScroll(); // Initial check
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -36,18 +38,13 @@ export const Navbar = () => {
     if (pathname === "/career") {
       setActiveItem("/career");
     } else if (pathname === "/") {
-      // If we're at the top of homepage, highlight Home
-      if (isAtTop) {
-        setActiveItem("/");
-      } else {
-        setActiveItem("#");
-      }
+      setActiveItem(isAtTop ? "/" : "#");
     }
   }, [pathname, isAtTop]);
 
-  // Highlight active section on homepage - FIXED
+  // Highlight active section on homepage
   useEffect(() => {
-    if (pathname !== "/" || !isMounted) return;
+    if (pathname !== "/" || !isMounted || typeof document === "undefined") return;
 
     const sections = ["about", "locations", "team"];
     const observer = new IntersectionObserver(
@@ -75,18 +72,16 @@ export const Navbar = () => {
     setIsOpen(false);
 
     if (path === "/") {
-      // Home button behavior
       if (pathname !== "/") {
         router.push("/");
-      } else if (isMounted) {
-        // Scroll to top smoothly
+      } else if (isMounted && typeof window !== "undefined") {
         window.scrollTo({ top: 0, behavior: "smooth" });
         setActiveItem("/");
       }
     } else if (path.startsWith("#")) {
       if (pathname !== "/") {
         router.push("/" + path);
-      } else if (isMounted) {
+      } else if (isMounted && typeof document !== "undefined") {
         const section = document.querySelector(path);
         if (section) section.scrollIntoView({ behavior: "smooth" });
       }
