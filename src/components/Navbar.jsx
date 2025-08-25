@@ -119,7 +119,7 @@ export const Navbar = () => {
         >
           <img
             className="h-12 w-auto rounded-xl"
-            src="/XtremeLogo.png"
+            src="/Xtreme.png"
             alt="Logo"
             style={{ height: "40px" }}
           />

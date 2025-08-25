@@ -1,11 +1,11 @@
 "use client";
 
 import React from "react";
-import Slider from "react-slick";
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import { ChevronLeft, ChevronRight, Phone, ToolCase, Wifi } from "lucide-react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+
 const locations = [
   {
     id: 1,
@@ -89,9 +89,34 @@ const locations = [
   },
 ];
 
+// Custom Arrow Components with proper positioning
+const NextArrow = ({ onClick, currentSlide, slideCount, ...props }) => {
+  return (
+    <div
+      {...props}
+      className="absolute -right-3 top-1/2 z-10 cursor-pointer text-orange-500 bg-white rounded-full p-2 shadow-lg hover:bg-orange-50 transform -translate-y-1/2"
+      onClick={onClick}
+    >
+      <ChevronRight size={24} />
+    </div>
+  );
+};
+
+const PrevArrow = ({ onClick, currentSlide, slideCount, ...props }) => {
+  return (
+    <div
+      {...props}
+      className="absolute -left-3 top-1/2 z-10 cursor-pointer text-orange-500 bg-white rounded-full p-2 shadow-lg hover:bg-orange-50 transform -translate-y-1/2"
+      onClick={onClick}
+    >
+      <ChevronLeft size={24} />
+    </div>
+  );
+};
+
 const MapComponent = ({ address }) => {
   return (
-    <div className="w-full h-[200px]">
+    <div className="w-full h-[200px] rounded-lg overflow-hidden mt-4">
       <iframe
         src={`https://www.google.com/maps?q=${encodeURIComponent(
           address
@@ -106,94 +131,107 @@ const MapComponent = ({ address }) => {
   );
 };
 
-// Custom Arrow Components
-const NextArrow = ({ onClick }) => (
-  <div
-    className="absolute top-45 right-2 z-10 cursor-pointer text-orange-500 bg-white rounded-full p-2 shadow-lg hover:bg-orange-50"
-    onClick={onClick}
-  >
-    <ChevronRight size={24} />
-  </div>
-);
-
-const PrevArrow = ({ onClick }) => (
-  <div
-    className="absolute top-45 left-2 z-10 cursor-pointer text-orange-500 bg-white rounded-full p-2 shadow-lg hover:bg-orange-50"
-    onClick={onClick}
-  >
-    <ChevronLeft size={24} />
-  </div>
-);
-
 const LocationsPage = () => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 1500,
+    speed: 1000,
     slidesToShow: 3,
-    slidesToScroll: 1,
+    slidesToScroll: 3,
+    autoplay: true,
+    autoplaySpeed: 2000,
     arrows: true,
+    pauseOnHover: true,
+    centerMode: true,
+    centerPadding: "10px",
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    pauseOnHover: true,
     responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: 2 } },
-      { breakpoint: 768, settings: { slidesToShow: 1 } },
+      {
+        breakpoint: 1280, // extra large screens (desktops)
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 1024, // laptops/tablets
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 768, // small tablets
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+      {
+        breakpoint: 640, // mobile
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+      {
+        breakpoint: 480, // extra small mobile
+        settings: {
+          slidesToShow: 1,
+        },
+      },
     ],
   };
 
   return (
-    <section>
-      <h1 className="text-4xl font-bold text-center text-orange-500 my-12">
+    <>
+      <h1 className="text-4xl font-bold text-center text-orange-500 mb-12">
         Our Locations
       </h1>
 
       <Slider {...settings}>
         {locations.map((loc) => (
-          <div key={loc.id} className="px-2">
-            <div className="bg-gradient-to-tr from-white to-orange-50 rounded-2xl shadow-xl p-6 hover:scale-105 transition-transform duration-300 relative overflow-hidden">
-              <h2 className="text-2xl font-semibold text-gray-800 mb-2">
+          <div key={loc.id} className="px-2 outline-none">
+            <div className="bg-gradient-to-tr from-white to-orange-50 rounded-2xl shadow-xl p-6 hover:scale-105 transition-transform duration-300 h-full">
+              <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-2">
                 {loc.name}
               </h2>
-              <p className="text-gray-600 mb-1">{loc.address}</p>
-              <p className="text-gray-600 mb-3">{loc.hours}</p>
+              <p className="text-gray-600 mb-1 text-sm md:text-base">
+                {loc.address}
+              </p>
+              <p className="text-gray-600 mb-3 text-sm md:text-base">
+                {loc.hours}
+              </p>
               <a
                 href={`tel:${loc.phone}`}
-                className="inline-block text-white bg-orange-500 px-4 py-2 rounded-lg font-semibold shadow hover:bg-orange-600 transition"
+                className="inline-block text-white bg-orange-500 px-4 py-2 rounded-lg font-semibold shadow hover:bg-orange-600 transition text-sm md:text-base"
               >
                 Call Now
               </a>
 
               {/* Services */}
-              <div className="flex space-x-4 mt-4">
+              <div className="flex flex-wrap gap-2 mt-4">
                 {loc.services.phone && (
-                  <div className="flex items-center space-x-1 text-green-600 bg-green-100 px-2 py-1 rounded-full text-sm">
-                    <Phone size={16} /> <span>Phone</span>
+                  <div className="flex items-center space-x-1 text-green-600 bg-green-100 px-2 py-1 rounded-full text-xs md:text-sm">
+                    <Phone size={14} /> <span>Phone</span>
                   </div>
                 )}
                 {loc.services.internet && (
-                  <div className="flex items-center space-x-1 text-blue-600 bg-blue-100 px-2 py-1 rounded-full text-sm">
-                    <Wifi size={16} /> <span>Internet</span>
+                  <div className="flex items-center space-x-1 text-blue-600 bg-blue-100 px-2 py-1 rounded-full text-xs md:text-sm">
+                    <Wifi size={14} /> <span>Internet</span>
                   </div>
                 )}
                 {loc.services.repair && (
-                  <div className="flex items-center space-x-1 text-red-600 bg-red-100 px-2 py-1 rounded-full text-sm">
-                    <ToolCase size={16} /> <span>Repair</span>
+                  <div className="flex items-center space-x-1 text-red-600 bg-red-100 px-2 py-1 rounded-full text-xs md:text-sm">
+                    <ToolCase size={14} /> <span>Repair</span>
                   </div>
                 )}
               </div>
 
               {/* Mini Map */}
-              <div className="mt-6 rounded-xl overflow-hidden shadow-lg border border-gray-200">
-                <MapComponent address={loc.address} />
-              </div>
+              <MapComponent address={loc.address} />
             </div>
           </div>
         ))}
       </Slider>
-    </section>
+    </>
   );
 };
 

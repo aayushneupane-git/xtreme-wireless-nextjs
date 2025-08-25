@@ -68,7 +68,7 @@ const AboutPage = () => {
 
             {/* Visit Location Button */}
             <a
-              href="#"
+              href="#location"
               className="flex items-center space-x-2 px-4 py-2 rounded-xl bg-gray-800 text-white shadow-lg transition-all duration-300 hover:bg-gray-900 hover:shadow-xl"
             >
               <span>📍</span>

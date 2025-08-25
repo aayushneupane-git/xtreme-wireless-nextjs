@@ -7,6 +7,7 @@ import AboutPage from "@/components/AboutUs";
 import Footer from "@/components/Footer";
 import Location from "./locations/page";
 import Team from "@/components/OurTeam";
+import LocationsPage from "../components/Locations";
 
 export default function Home() {
   return (
@@ -19,7 +20,7 @@ export default function Home() {
         </section>
 
         <section id="locations">
-          <Location />
+          <LocationsPage />
         </section>
 
         <section id="team">

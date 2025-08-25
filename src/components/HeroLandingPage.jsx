@@ -7,7 +7,24 @@ import "../app/style.css";
 
 const HeroLandingPage = () => {
   const playerRef = useRef(null);
-  const [showImages, setShowImages] = useState(false); // New state
+  const [showImages, setShowImages] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if device is mobile on component mount and resize
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    // Initial check
+    checkIsMobile();
+
+    // Add event listener for window resize
+    window.addEventListener("resize", checkIsMobile);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", checkIsMobile);
+  }, []);
 
   // Pause the Lottie animation after 1.2s
   useEffect(() => {
@@ -15,7 +32,7 @@ const HeroLandingPage = () => {
       if (playerRef.current) {
         playerRef.current.pause();
       }
-      setShowImages(true); // Show images after Lottie pauses
+      setShowImages(true);
     }, 1200);
     return () => clearTimeout(timer);
   }, []);
@@ -45,11 +62,6 @@ const HeroLandingPage = () => {
     },
   };
 
-  const imageVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 0.8 } },
-  };
-
   return (
     <ContentWrapper>
       <motion.div
@@ -60,7 +72,7 @@ const HeroLandingPage = () => {
       >
         {/* Left Side */}
         <motion.div
-          className="p-6 flex flex-col items-start justify-center h-[70vh] md:h-full"
+          className="md:p-6 p-3 flex flex-col items-start justify-center h-[60vh] md:h-full"
           variants={containerVariants}
         >
           <motion.h1
@@ -92,36 +104,59 @@ const HeroLandingPage = () => {
 
         {/* Right Side with floating images + Lottie */}
         <motion.div
-          className="relative flex items-center justify-center h-[520px] w-[520px]"
+          className="relative flex hidden md:block items-center justify-center w-full max-w-[520px] mx-auto md:mx-0"
           variants={rightVariants}
+          style={{
+            height: isMobile ? "70vw" : "520px",
+            maxHeight: "520px",
+            width: isMobile ? "70vw" : "520px",
+          }}
         >
           {showImages && (
             <>
               <motion.img
                 src="https://images.squarespace-cdn.com/content/v1/605b50a49e27ed4cf7bf564a/1618160110000-FTUKCS1FTBGB8FCMBKCM/boost-mobile.png"
-                className="w-[120px] h-[120px] absolute top-10 right-20 animate-float-slow"
+                className="absolute animate-float-slow"
+                style={{
+                  width: isMobile ? "20vw" : "120px",
+                  height: isMobile ? "20vw" : "120px",
+                  maxWidth: "120px",
+                  maxHeight: "120px",
+                  top: isMobile ? "5%" : "10%",
+                  right: isMobile ? "15%" : "20%",
+                }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0 }} // first image fades immediately
+                transition={{ duration: 0.8, delay: 0 }}
               />
               <motion.img
                 src="https://media.istockphoto.com/id/1066216872/vector/vector-illustration-icon-with-a-communication-concept-for-the-setting-and-repair-information.jpg?s=612x612&w=0&k=20&c=JOQDa1v_y9eiAk8i8DfL9eX_bzvXyX4KGLH2W-eYs8o="
-                className="w-[150px] h-[150px] absolute top-30 left-10 animate-float-fast"
+                className="absolute animate-float-fast"
+                style={{
+                  width: isMobile ? "25vw" : "150px",
+                  height: isMobile ? "25vw" : "150px",
+                  maxWidth: "150px",
+                  maxHeight: "150px",
+                  top: isMobile ? "25%" : "30%",
+                  left: isMobile ? "8%" : "10%",
+                }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.4 }} // second image fades in after 0.4s
+                transition={{ duration: 0.8, delay: 0.4 }}
               />
             </>
           )}
 
           {/* Player in center */}
-          <Player
-            ref={playerRef}
-            autoplay
-            src="/homebg.json"
-            style={{ height: 520, width: 520 }}
-            renderer="svg"
-          />
+          <div className="w-full h-full">
+            <Player
+              ref={playerRef}
+              autoplay
+              src="/homebg.json"
+              style={{ height: "100%", width: "100%" }}
+              renderer="svg"
+            />
+          </div>
         </motion.div>
       </motion.div>
     </ContentWrapper>
