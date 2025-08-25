@@ -18,9 +18,9 @@ export const Navbar = () => {
     setIsMounted(true);
   }, []);
 
-  // Handle scroll effect for navbar and top detection
+  // Scroll effect
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (!isMounted) return;
 
     const handleScroll = () => {
       const scrollY = window.scrollY;
@@ -28,31 +28,28 @@ export const Navbar = () => {
       setIsAtTop(scrollY < 50);
     };
 
-    handleScroll(); // Initial check
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isMounted]);
 
-  // Sync activeItem with route and top position
+  // Sync activeItem with route
   useEffect(() => {
-    if (pathname === "/career") {
-      setActiveItem("/career");
-    } else if (pathname === "/") {
-      setActiveItem(isAtTop ? "/" : "#");
-    }
+    if (pathname === "/career") setActiveItem("/career");
+    else if (pathname === "/") setActiveItem(isAtTop ? "/" : "#");
   }, [pathname, isAtTop]);
 
-  // Highlight active section on homepage
+  // Highlight sections on homepage
   useEffect(() => {
-    if (pathname !== "/" || !isMounted || typeof document === "undefined") return;
+    if (!isMounted || pathname !== "/") return;
 
     const sections = ["about", "locations", "team"];
+    if (typeof document === "undefined") return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveItem(`#${entry.target.id}`);
-          }
+          if (entry.isIntersecting) setActiveItem(`#${entry.target.id}`);
         });
       },
       { threshold: 0.5 }
@@ -66,22 +63,19 @@ export const Navbar = () => {
     return () => observer.disconnect();
   }, [pathname, isMounted]);
 
-  // Handle click
+  // Handle navigation clicks
   const handleItemClick = (path) => {
     setActiveItem(path);
     setIsOpen(false);
 
+    if (!isMounted) return;
+
     if (path === "/") {
-      if (pathname !== "/") {
-        router.push("/");
-      } else if (isMounted && typeof window !== "undefined") {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-        setActiveItem("/");
-      }
+      if (pathname !== "/") router.push("/");
+      else window.scrollTo({ top: 0, behavior: "smooth" });
     } else if (path.startsWith("#")) {
-      if (pathname !== "/") {
-        router.push("/" + path);
-      } else if (isMounted && typeof document !== "undefined") {
+      if (pathname !== "/") router.push("/" + path);
+      else {
         const section = document.querySelector(path);
         if (section) section.scrollIntoView({ behavior: "smooth" });
       }
@@ -108,16 +102,8 @@ export const Navbar = () => {
     >
       <div className="container mx-auto flex items-center justify-between px-6 lg:px-12">
         {/* Logo */}
-        <button
-          onClick={() => handleItemClick("/")}
-          className="flex items-center group"
-        >
-          <img
-            className="h-12 w-auto rounded-xl"
-            src="/Xtreme.png"
-            alt="Logo"
-            style={{ height: "40px" }}
-          />
+        <button onClick={() => handleItemClick("/")} className="flex items-center group">
+          <img className="h-12 w-auto rounded-xl" src="/Xtreme.png" alt="Logo" />
         </button>
 
         {/* Desktop Menu */}
