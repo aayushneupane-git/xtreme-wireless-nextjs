@@ -97,9 +97,14 @@ const Footer = () => {
         viewport={{ once: true }}
       >
         Proudly developed by .{" "}
-        <span className="text-orange-600 font-semibold">
+        <a
+          href="https://www.nepsoftsolutions.com"
+          className="text-orange-600 cursor-pointer font-semibold"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           NepSoftSolution Inc
-        </span>
+        </a>
       </motion.div>
     </footer>
   );
