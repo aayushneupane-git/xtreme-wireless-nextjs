@@ -9,128 +9,100 @@ import "slick-carousel/slick/slick-theme.css";
 const locations = [
   {
     id: 1,
-    name: "Xtreme Wireless - Downtown",
-    lat: 39.9612,
-    lng: -82.9988,
-    address: "123 Main St, Columbus, OH",
-    phone: "+1 (614) 555-1234",
-    hours: "Mon-Sat: 10am-8pm, Sun: 12pm-6pm",
+    name: "Boost Mobile - Parsons",
+    lat: 39.9413683,
+    lng: -82.9855364,
+    address: "1090 Parsons Ave, Columbus, OH",
+    phone: "+1 (614) 443-1551",
+    hours: "Mon-Sat: 10am-8pm, Sun: 11am-6pm",
     services: { phone: true, internet: true, repair: true },
   },
   {
     id: 2,
-    name: "Xtreme Wireless - East Side",
+    name: "Boost Mobile - Downtown",
     lat: 39.9615,
     lng: -82.995,
-    address: "456 Broad St, Columbus, OH",
-    phone: "+1 (614) 555-5678",
+    address: "1062 E Main St, Columbus, OH",
+    phone: "+1 (614) 972-7242",
     hours: "Mon-Sat: 10am-8pm, Sun: 12pm-6pm",
-    services: { phone: true, internet: true, repair: false },
+    services: { phone: true, internet: true, repair: true },
   },
   {
     id: 3,
-    name: "Xtreme Wireless - West Side",
+    name: "Boost Mobile - Lockbourne",
     lat: 39.959,
     lng: -82.998,
-    address: "789 High St, Columbus, OH",
-    phone: "+1 (614) 555-9012",
-    hours: "Mon-Sat: 10am-8pm, Sun: 12pm-6pm",
-    services: { phone: true, internet: false, repair: true },
+    address: "1912 Lockbourne Rd, Columbus, OH",
+    phone: "+1 (614) 972-7625",
+    hours: "Mon-Sat: 9am-7pm, Sun: 11am-6pm",
+    services: { phone: true, internet: true, repair: true },
   },
   {
     id: 4,
-    name: "Xtreme Wireless - North Side",
+    name: "Boost Mobile - Old Hamilton",
     lat: 40.015,
     lng: -83.015,
-    address: "101 North Ave, Columbus, OH",
-    phone: "+1 (614) 555-3456",
-    hours: "Mon-Sat: 10am-8pm, Sun: 12pm-6pm",
+    address: "1432 S Hamilton Rd, Columbus, OH",
+    phone: "+1 (614) 694-0370",
+    hours: "Mon-Sat: 10am-8pm, Sun: 11am-6pm",
     services: { phone: true, internet: true, repair: true },
   },
   {
     id: 5,
-    name: "Xtreme Wireless - South Side",
+    name: "Boost Mobile - New Hamilton",
     lat: 39.915,
     lng: -82.915,
-    address: "202 South Blvd, Columbus, OH",
-    phone: "+1 (614) 555-7890",
-    hours: "Mon-Sat: 10am-8pm, Sun: 12pm-6pm",
-    services: { phone: true, internet: false, repair: false },
+    address: "2272 S Hamilton Rd, Columbus, OH",
+    phone: "+1 (614) 694-0097",
+    hours: "Mon-Sat: 10am-8pm, Sun: 11am-6pm",
+    services: { phone: true, internet: true, repair: true },
   },
   {
     id: 6,
-    name: "Xtreme Wireless - Central",
+    name: "Boost Mobile - Brice Rd",
     lat: 39.975,
     lng: -83.005,
-    address: "303 Central Rd, Columbus, OH",
-    phone: "+1 (614) 555-2345",
-    hours: "Mon-Sat: 10am-8pm, Sun: 12pm-6pm",
+    address: "1896 Brice Rd, Columbus, OH",
+    phone: "+1 (614) 735-5555",
+    hours: "Mon-Sat: 10am-8pm, Sun: 11am-6pm",
     services: { phone: true, internet: true, repair: true },
   },
   {
     id: 7,
-    name: "Xtreme Wireless - Eastgate",
+    name: "Boost Mobile - Courtright",
     lat: 39.945,
     lng: -82.975,
-    address: "404 Eastgate Dr, Columbus, OH",
-    phone: "+1 (614) 555-6789",
-    hours: "Mon-Sat: 10am-8pm, Sun: 12pm-6pm",
-    services: { phone: true, internet: true, repair: false },
-  },
-  {
-    id: 8,
-    name: "Xtreme Wireless - Westgate",
-    lat: 39.935,
-    lng: -83.025,
-    address: "505 Westgate Ln, Columbus, OH",
-    phone: "+1 (614) 555-0123",
-    hours: "Mon-Sat: 10am-8pm, Sun: 12pm-6pm",
-    services: { phone: true, internet: false, repair: true },
-  },
-  {
-    id: 9,
-    name: "Xtreme Wireless - Uptown",
-    lat: 39.955,
-    lng: -82.985,
-    address: "606 Uptown St, Columbus, OH",
-    phone: "+1 (614) 555-4567",
-    hours: "Mon-Sat: 10am-8pm, Sun: 12pm-6pm",
+    address: "3657f E Livingston Ave, Columbus, OH",
+    phone: "+1 (614) 237-6065",
+    hours: "Mon-Sat: 10am-8pm, Sun: 11am-6pm",
     services: { phone: true, internet: true, repair: true },
   },
   {
-    id: 10,
-    name: "Xtreme Wireless - Downtown West",
-    lat: 39.975,
-    lng: -83.015,
-    address: "707 Downtown West Ave, Columbus, OH",
-    phone: "+1 (614) 555-8901",
-    hours: "Mon-Sat: 10am-8pm, Sun: 12pm-6pm",
-    services: { phone: true, internet: true, repair: false },
-  },
-  {
-    id: 11,
-    name: "Xtreme Wireless - Downtown East",
-    lat: 39.985,
-    lng: -82.995,
-    address: "808 Downtown East Rd, Columbus, OH",
-    phone: "+1 (614) 555-3456",
-    hours: "Mon-Sat: 10am-8pm, Sun: 12pm-6pm",
+    id: 8,
+    name: "Xtreme Wireless - Hudson",
+    lat: 39.935,
+    lng: -83.025,
+    address: "1062 E Hudson St, Columbus, OH",
+    phone: "+1 (614) 784-1776",
+    hours: "Mon-Sat: 9am-9pm, Sun: 10am-8pm",
     services: { phone: true, internet: true, repair: true },
   },
 ];
 
-const MapComponent = ({ lat, lng }) => {
-  const containerStyle = { width: "100%", height: "150px" };
+const MapComponent = ({ address }) => {
   return (
-    <LoadScript googleMapsApiKey="AIzaSyDovgMwEuk25CKnsBdFDfUDX121eKzTkes">
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={{ lat, lng }}
-        zoom={15}
-      >
-        <Marker position={{ lat, lng }} />
-      </GoogleMap>
-    </LoadScript>
+    <div className="w-full h-[200px]">
+      <iframe
+        src={`https://www.google.com/maps?q=${encodeURIComponent(
+          address
+        )}&output=embed`}
+        width="100%"
+        height="100%"
+        style={{ border: 0 }}
+        allowFullScreen=""
+        loading="lazy"
+      ></iframe>
+    </div>
   );
 };
 
@@ -215,7 +187,7 @@ const LocationsPage = () => {
 
               {/* Mini Map */}
               <div className="mt-6 rounded-xl overflow-hidden shadow-lg border border-gray-200">
-                <MapComponent lat={loc.lat} lng={loc.lng} />
+                <MapComponent address={loc.address} />
               </div>
             </div>
           </div>

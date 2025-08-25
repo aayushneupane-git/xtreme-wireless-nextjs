@@ -4,13 +4,28 @@ import { ThemeProvider } from "next-themes";
 import Image from "next/image";
 import ContentWrapper from "@/components/ContentWrapper";
 import AboutPage from "@/components/AboutUs";
+import Footer from "@/components/Footer";
+import Location from "./locations/page";
+import Team from "@/components/OurTeam";
 
 export default function Home() {
   return (
     <ThemeProvider>
       <ContentWrapper>
         <HeroLandingPage />
-        <AboutPage/>
+
+        <section id="about">
+          <AboutPage />
+        </section>
+
+        <section id="locations">
+          <Location />
+        </section>
+
+        <section id="team">
+          <Team />
+        </section>
+        <Footer />
       </ContentWrapper>
     </ThemeProvider>
   );
