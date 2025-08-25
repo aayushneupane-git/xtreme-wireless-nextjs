@@ -18,6 +18,16 @@ const locations = [
     services: { phone: true, internet: true, repair: true },
   },
   {
+    id: 1,
+    name: "Boost Mobile - Hilliard",
+    lat: 39.9413683,
+    lng: -82.9855364,
+    address: "5474 Roberts Rd, Hilliard, OH",
+    phone: "+1 (614) 443-1551",
+    hours: "Mon-Sat: 10am-8pm, Sun: 11am-6pm",
+    services: { phone: true, internet: true, repair: true },
+  },
+  {
     id: 2,
     name: "Boost Mobile - Downtown",
     lat: 39.9615,
@@ -167,11 +177,11 @@ const LocationsPage = () => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 800,
+    speed: 2000,
     slidesToShow, // 3 desktop, 1 phone (via hook)
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2200,
+    autoplaySpeed: 4000,
     arrows, // hidden on phone (via hook)
     pauseOnHover: true,
     centerMode: false, // no peek
