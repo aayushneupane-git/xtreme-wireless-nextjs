@@ -5,7 +5,6 @@ import Image from "next/image";
 import ContentWrapper from "@/components/ContentWrapper";
 import AboutPage from "@/components/AboutUs";
 import Footer from "@/components/Footer";
-import Location from "./locations/page";
 import Team from "@/components/OurTeam";
 import LocationsPage from "../components/Locations";
 
