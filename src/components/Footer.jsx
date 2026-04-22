@@ -89,7 +89,7 @@ const Footer = () => {
           </div>
         </motion.div>
       </motion.div>
-      <motion.div
+      {/* <motion.div
         className="text-center text-sm text-gray-500"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -105,7 +105,7 @@ const Footer = () => {
         >
           NepSoftSolution Inc
         </a>
-      </motion.div>
+      </motion.div> */}
     </footer>
   );
 };
